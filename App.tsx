@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
+import { COLORS } from "./src/Constants";
+
 import Puzzle from "./src/Puzzle";
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
       <Puzzle />
@@ -15,8 +17,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
   },
 });
+
+export default App;

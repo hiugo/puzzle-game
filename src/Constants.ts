@@ -1,3 +1,13 @@
+// COLORS
+
+export const COLORS = {
+  primary: "#1a91ff",
+  black: "#1e293b",
+  white: "#ffffff",
+  lightGrey: "#e2e8f0",
+  darkGrey: "#cbd5e1",
+};
+
 // SIZES
 
 // Sizes for the svgs (100x100)

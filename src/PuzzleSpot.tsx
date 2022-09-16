@@ -1,27 +1,23 @@
 import { StyleSheet, View } from "react-native";
-import Svg, { ClipPath, Defs, Path, Use } from "react-native-svg";
 
 import {
   PUZZLE_PIECES,
   PUZZLE_PIECE_BOX_SIZE,
   PUZZLE_PIECE_SIZE,
-  SVG_BOX_SIZE,
-  SVG_SIZE,
 } from "./Constants";
+
+import Shape from "./Shape";
 
 type Props = {
   index: number;
   shape: string;
 };
 
-export default function PuzzleSpot({ index, shape }: Props) {
+function PuzzleSpot({ index, shape }: Props) {
   const piece = PUZZLE_PIECES[index];
 
   const x = (PUZZLE_PIECE_SIZE / 2) * piece.x;
   const y = (PUZZLE_PIECE_SIZE / 2) * piece.y;
-
-  const pathX = -(SVG_SIZE / 2) - (SVG_SIZE / 2) * piece.x;
-  const pathY = -(SVG_SIZE / 2) - (SVG_SIZE / 2) * piece.y;
 
   return (
     <View
@@ -30,26 +26,7 @@ export default function PuzzleSpot({ index, shape }: Props) {
         { transform: [{ translateX: x }, { translateY: y }] },
       ]}
     >
-      <Svg
-        width="100%"
-        height="100%"
-        viewBox={`0 0 ${SVG_BOX_SIZE} ${SVG_BOX_SIZE}`}
-      >
-        <Defs>
-          <ClipPath id="shape">
-            <Path d={shape} x={pathX} y={pathY} />
-          </ClipPath>
-          <Path id="puzzle" d={piece.path} />
-        </Defs>
-        <Use href="#puzzle" fill="#e2e8f0" clipPath="url(#shape)" />
-        <Use
-          href="#puzzle"
-          stroke="#cbd5e1"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </Svg>
+      <Shape type="spot" shape={shape} piece={piece} />
     </View>
   );
 }
@@ -62,3 +39,5 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 });
+
+export default PuzzleSpot;

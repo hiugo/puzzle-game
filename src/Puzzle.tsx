@@ -14,7 +14,7 @@ import { PIECES_DISTANCE, PUZZLE_PIECES, SHAPES, shuffle } from "./Constants";
 import PuzzlePiece from "./PuzzlePiece";
 import PuzzleSpot from "./PuzzleSpot";
 
-export default function Puzzle() {
+function Puzzle() {
   const [currentShape, setCurrentShape] = useState(0);
   const [shuffledPieces, setShuffledPieces] = useState(() =>
     shuffle([...Array(PUZZLE_PIECES.length).keys()])
@@ -77,3 +77,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default Puzzle;

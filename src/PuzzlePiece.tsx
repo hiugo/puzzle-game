@@ -13,7 +13,6 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import Svg, { ClipPath, Defs, Path, Use } from "react-native-svg";
 
 import {
   getRandomRotation,
@@ -22,9 +21,9 @@ import {
   PUZZLE_PIECES,
   PUZZLE_PIECE_BOX_SIZE,
   PUZZLE_PIECE_SIZE,
-  SVG_BOX_SIZE,
-  SVG_SIZE,
 } from "./Constants";
+
+import Shape from "./Shape";
 
 type Props = {
   index: number;
@@ -33,12 +32,7 @@ type Props = {
   correctPieces: SharedValue<number>;
 };
 
-export default function PuzzlePiece({
-  index,
-  shape,
-  shuffledPieces,
-  correctPieces,
-}: Props) {
+function PuzzlePiece({ index, shape, shuffledPieces, correctPieces }: Props) {
   const shuffledIndex = shuffledPieces[index];
   const piece = PUZZLE_PIECES[index];
   const shuffledPiece = PUZZLE_PIECES[shuffledIndex];
@@ -50,9 +44,6 @@ export default function PuzzlePiece({
   const initialY = (PUZZLE_PIECE_SIZE / 2) * piece.y;
   const shuffledX = 60 * shuffledPiece.x - PIECES_DISTANCE;
   const shuffledY = 60 * shuffledPiece.y;
-
-  const pathX = -(SVG_SIZE / 2) - (SVG_SIZE / 2) * piece.x;
-  const pathY = -(SVG_SIZE / 2) - (SVG_SIZE / 2) * piece.y;
 
   const translateX = useSharedValue(initialX);
   const translateY = useSharedValue(initialY);
@@ -121,27 +112,7 @@ export default function PuzzlePiece({
   return (
     <PanGestureHandler onGestureEvent={panGestureHandler}>
       <Animated.View style={[styles.container, animatedStyle]}>
-        <Svg
-          width="100%"
-          height="100%"
-          viewBox={`0 0 ${SVG_BOX_SIZE} ${SVG_BOX_SIZE}`}
-        >
-          <Defs>
-            <ClipPath id="shape">
-              <Path d={shape} x={pathX} y={pathY} />
-            </ClipPath>
-            <Path id="puzzle" d={piece.path} />
-          </Defs>
-          <Use href="#puzzle" fill="#ffffff" />
-          <Use href="#puzzle" fill="#1A91FF" clipPath="url(#shape)" />
-          <Use
-            href="#puzzle"
-            stroke="#1e293b"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </Svg>
+        <Shape type="piece" shape={shape} piece={piece} />
       </Animated.View>
     </PanGestureHandler>
   );
@@ -154,3 +125,5 @@ const styles = StyleSheet.create({
     height: PUZZLE_PIECE_BOX_SIZE,
   },
 });
+
+export default PuzzlePiece;
