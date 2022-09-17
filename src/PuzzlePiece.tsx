@@ -21,6 +21,7 @@ import {
   PUZZLE_PIECES,
   PUZZLE_PIECE_BOX_SIZE,
   PUZZLE_PIECE_SIZE,
+  SVG_SIZE,
 } from "./Constants";
 
 import Shape from "./Shape";
@@ -42,8 +43,8 @@ function PuzzlePiece({ index, shape, shuffledPieces, correctPieces }: Props) {
 
   const initialX = (PUZZLE_PIECE_SIZE / 2) * piece.x;
   const initialY = (PUZZLE_PIECE_SIZE / 2) * piece.y;
-  const shuffledX = 60 * shuffledPiece.x - PIECES_DISTANCE;
-  const shuffledY = 60 * shuffledPiece.y;
+  const shuffledX = SVG_SIZE * shuffledPiece.x - PIECES_DISTANCE;
+  const shuffledY = SVG_SIZE * shuffledPiece.y;
 
   const translateX = useSharedValue(initialX);
   const translateY = useSharedValue(initialY);

@@ -51,26 +51,3 @@ function Shape({ type, shape, piece }: Props) {
 }
 
 export default memo(Shape);
-
-/*
- <Svg
-        width="100%"
-        height="100%"
-        viewBox={`0 0 ${SVG_BOX_SIZE} ${SVG_BOX_SIZE}`}
-      >
-        <Defs>
-          <ClipPath id="shape">
-            <Path d={shape} x={pathX} y={pathY} />
-          </ClipPath>
-          <Path id="puzzle" d={piece.path} />
-        </Defs>
-        <Use href="#puzzle" fill="#e2e8f0" clipPath="url(#shape)" />
-        <Use
-          href="#puzzle"
-          stroke="#cbd5e1"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </Svg>
-      */
